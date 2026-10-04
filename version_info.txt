@@ -4,8 +4,8 @@
 #
 VSVersionInfo(
   ffi=FixedFileInfo(
-    filevers=(1, 0, 1, 0),
-    prodvers=(1, 0, 1, 0),
+    filevers=(1, 0, 2, 0),
+    prodvers=(1, 0, 2, 0),
     mask=0x3f,
     flags=0x0,
     OS=0x40004,
@@ -21,12 +21,12 @@ VSVersionInfo(
           [
             StringStruct(u'CompanyName', u'PixelPie Media'),
             StringStruct(u'FileDescription', u'CapCut Cache Recover - Lossless Forensic Stream Recovery Engine'),
-            StringStruct(u'FileVersion', u'1.0.1.0'),
+            StringStruct(u'FileVersion', u'1.0.2.0'),
             StringStruct(u'InternalName', u'CapCut-Cache-Recover'),
             StringStruct(u'LegalCopyright', u'Copyright \xa9 2026 PixelPie Media by Md. Zobaed Islam Shanto'),
             StringStruct(u'OriginalFilename', u'CapCut-Cache-Recover.exe'),
             StringStruct(u'ProductName', u'CapCut Cache Recover'),
-            StringStruct(u'ProductVersion', u'1.0.1.0'),
+            StringStruct(u'ProductVersion', u'1.0.2.0'),
             StringStruct(u'Comments', u'https://github.com/pikadexofc/export-capcut-pro-video-free'),
             StringStruct(u'LegalTrademarks', u'PixelPie Media')
           ]

@@ -11,7 +11,7 @@
       <img src="https://img.shields.io/github/actions/workflow/status/pikadexofc/export-capcut-pro-video-free/ci.yml?branch=main&label=CI&style=flat-square&color=fa7b1e&labelColor=0d1117" alt="CI Status" />
     </a>
     <a href="https://github.com/pikadexofc/export-capcut-pro-video-free/releases">
-      <img src="https://img.shields.io/badge/Release-v1.0.1-fa7b1e?style=flat-square&labelColor=0d1117" alt="Version 1.0.1" />
+      <img src="https://img.shields.io/badge/Release-v1.0.2-fa7b1e?style=flat-square&labelColor=0d1117" alt="Version 1.0.2" />
     </a>
     <a href="https://opensource.org/licenses/MIT">
       <img src="https://img.shields.io/badge/License-MIT-fa7b1e?style=flat-square&labelColor=0d1117" alt="License MIT" />
