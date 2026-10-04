@@ -40,6 +40,14 @@ irm https://raw.githubusercontent.com/pikadexofc/export-capcut-pro-video-free/ma
 
 ---
 
+## 🧒 Explain Like I'm 10: How Does It Work?
+
+1. **The Problem**: When CapCut saves your draft preview, it scrambles every 50th piece of your video like a messy puzzle so regular players (like VLC or Windows Media Player) get confused and give up.
+2. **The Magic**: **Export Capcut Pro Video Free** finds the exact secret rule CapCut used to scramble it, unscrambles the puzzle pieces in **less than 1 second**, and throws away the lock!
+3. **The Result**: You get your full video back with **zero scratches**, **100% original quality**, ready to watch and share!
+
+---
+
 ## 💎 The Three Core Pillars
 
 * **Zero Re-Encoding Loss**: Unlike screen recorders or transcoders that degrade bitrates and introduce generational compression artifacts, this engine mathematically inverts the XOR obfuscation in-place. The exact original H.264 NAL units and AAC audio frames are preserved bit-for-bit.

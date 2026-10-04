@@ -30,3 +30,8 @@ htmlcov/
 *.jpg
 recovered_capcut_videos/
 recovered/
+
+# Daemons & Secrets
+scripts/daemons/llm_client.py
+scripts/daemons/generated_marketing/
+*.env
