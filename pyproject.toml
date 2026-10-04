@@ -49,5 +49,6 @@ Issues = "https://github.com/pikadexofc/export-capcut-pro-video-free/issues"
 
 [project.scripts]
 export-capcut-pro-video-free = "capcut_cache_recover.cli:main"
+export-capcut-gui = "capcut_cache_recover.gui:launch_gui"
 capcut-pro-free = "capcut_cache_recover.cli:main"
 capcut-cache-recover = "capcut_cache_recover.cli:main"

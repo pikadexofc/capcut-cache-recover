@@ -5,7 +5,64 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)]()
 
-> **Export Capcut Pro Video Free** is a high-performance open-source recovery and export engine to decrypt, unlock, and export unplayable **CapCut** and **JianYing** draft cache videos (`moov atom not found` / ByteDance `BDVE` Cryptor Type 1). Zero re-encoding, 100% original bitstream quality.
+> **Export Capcut Pro Video Free** is a zero-friction recovery and export engine to unlock and export unplayable **CapCut** and **JianYing** draft cache videos (`moov atom not found` / ByteDance `BDVE` Cryptor Type 1). Zero re-encoding, 100% original bitstream quality.
+
+---
+
+## ⚡ Zero-Friction Usage (Pick Your Favorite Way)
+
+No complex terminal commands or video engineering knowledge needed.
+
+### 🖱️ Method 1: Windows 1-Click Launcher & Drag-and-Drop (Easiest)
+
+1. Clone or [download this repo](https://github.com/pikadexofc/export-capcut-pro-video-free/archive/refs/heads/main.zip).
+2. **Drag & Drop**: Drag any unplayable CapCut video file and drop it directly onto **`Export-CapCut-Free.bat`**. It will instantly decrypt and open the exported video!
+3. **Or Double-Click**: Double-click **`Export-CapCut-Free.bat`** to launch the Dark-Mode Visual App!
+
+---
+
+### 🎨 Method 2: Modern Dark-Mode GUI (Visual App)
+
+Launch the visual desktop interface:
+
+```bash
+python -m capcut_cache_recover.gui
+# Or after pip install:
+export-capcut-gui
+```
+
+- **⚡ 1-Click Auto Scan**: Automatically finds all CapCut and JianYing draft cache folders and exports every video to your Desktop.
+- **📁 Browse & Export**: Select any individual `.mp4` / `.mov` / `.tmp` video and export it with one click.
+- **📂 Open Output Folder**: Instant button to view your rendered MP4s in File Explorer / Finder.
+
+---
+
+### 💻 Method 3: Smart Interactive CLI
+
+Simply run without flags:
+```bash
+python -m capcut_cache_recover.cli
+```
+You will be prompted with a zero-friction interactive menu:
+```text
+[?] No arguments provided. Select an option:
+    [1] ⚡ 1-Click Auto Scan & Export All CapCut Drafts Free (Recommended)
+    [2] 🎬 Launch Modern Visual GUI
+    [3] 📂 Enter a video file path manually
+    [4] ❓ View Command Line Help
+```
+
+Or pass flags directly:
+```bash
+# Export a single video
+python -m capcut_cache_recover.cli "D:\path\to\encrypted_video.mp4" -o exported.mp4
+
+# Auto-detect and export all CapCut drafts
+python -m capcut_cache_recover.cli --auto
+
+# Scan a specific directory
+python -m capcut_cache_recover.cli --scan "D:\capcut cache\CapCut Drafts" -o "C:\ExportedVideos"
+```
 
 ---
 
@@ -30,64 +87,16 @@ CapCut and JianYing (ByteDance) protect draft cache clips using a proprietary co
 
 ---
 
-## The Solution: Export Capcut Pro Video Free
-
-**Export Capcut Pro Video Free** mathematically solves the exact `(step, length, key)` tuple by:
-1. Parsing the raw MP4 container structures and locating valid H.264 NAL units (SPS, PPS, IDR slices).
-2. Setting up a constraint satisfaction solver on the modulo offsets:
-   $$\text{low} = \max(\text{remainder} + 1), \quad \text{high} = \min(\text{remainder})$$
-3. Verifying the derived parameters against the file's embedded SHA-256 footer hash.
-4. Performing a zero-copy periodic bitwise XOR inversion and stripping the proprietary `bdve` trailer.
-
-**Result**: 100% clean, standard MP4 video rendered without paying or needing CapCut's export gate.
-
----
-
-## ✨ Features
+## ✨ Key Features
 
 - ⚡ **Lightning Fast**: Exports a 30 MB 1080p video in under **0.3 seconds**.
 - 💎 **Zero Quality Loss**: Inverts the bitwise scrambling directly. No re-encoding, zero compression artifacts, identical audio/video bitrates.
-- 🔍 **Auto-Scan & Batch Export**: Recursively searches your disks and draft folders for all encrypted clips.
-- 📦 **Zero Third-Party Dependencies**: Written entirely in pure Python standard library (`pathlib`, `struct`, `hashlib`, `argparse`).
+- 🖱️ **Drag-and-Drop Launcher**: Includes a native Windows `.bat` launcher for 1-second drag-and-drop export.
+- 🎨 **Modern Dark-Mode GUI**: Zero external GUI dependencies (built on standard Tkinter).
+- 🔍 **Auto-Scan & Batch Export**: Recursively searches disks and draft folders for all encrypted clips.
+- 📦 **Zero Third-Party Dependencies**: Written entirely in pure Python standard library (`pathlib`, `struct`, `hashlib`, `tkinter`).
 - 🛡️ **Built-in MP4 Validator**: Verifies `ftyp`, `mdat`, `moov`, video resolution, and audio tracks automatically without needing FFmpeg installed.
 - 🤖 **Background Daemon Support**: Ships with an autonomous watcher daemon to monitor CapCut folders and auto-export clips as they render.
-
----
-
-## 🚀 Quick Start
-
-### 1. Installation
-
-Clone the repository:
-```bash
-git clone https://github.com/pikadexofc/export-capcut-pro-video-free.git
-cd export-capcut-pro-video-free
-```
-
-(Optional) Install in editable mode:
-```bash
-pip install -e .
-```
-
-### 2. Basic CLI Usage
-
-#### Export a Single Video Free
-```bash
-python -m capcut_cache_recover.cli "D:\path\to\encrypted_video.mp4" -o exported.mp4
-# Or after pip install:
-export-capcut-pro-video-free "D:\path\to\encrypted_video.mp4" -o exported.mp4
-```
-
-#### Automatically Detect and Export All CapCut Drafts
-```bash
-export-capcut-pro-video-free --auto
-```
-*Automatically searches standard CapCut and JianYing draft paths on Windows & macOS.*
-
-#### Scan a Specific Directory
-```bash
-export-capcut-pro-video-free --scan "D:\capcut cache\CapCut Drafts" -o "C:\ExportedVideos"
-```
 
 ---
 

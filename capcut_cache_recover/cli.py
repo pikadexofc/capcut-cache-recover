@@ -62,12 +62,17 @@ def main(argv=None) -> int:
         help="Perform MP4 container validation after export (default: True).",
     )
     parser.add_argument(
-        "-v", "--verbose",
+        "--gui",
         action="store_true",
-        help="Enable detailed debug logging during cryptor parameter discovery.",
+        help="Launch the modern visual graphical user interface.",
     )
 
     args = parser.parse_args(argv)
+
+    if args.gui:
+        from .gui import launch_gui
+        launch_gui()
+        return 0
 
     print(BANNER)
 
@@ -204,6 +209,32 @@ def main(argv=None) -> int:
         except Exception as e:
             print(f"[-] Unexpected error: {e}")
             return 1
+
+    # 4. ZERO-ARGUMENT INTERACTIVE FLOW
+    if sys.stdin.isatty() and argv is None:
+        print("[?] No arguments provided. Select an option:")
+        print("    [1] ⚡ 1-Click Auto Scan & Export All CapCut Drafts Free (Recommended)")
+        print("    [2] 🎬 Launch Modern Visual GUI")
+        print("    [3] 📂 Enter a video file path manually")
+        print("    [4] ❓ View Command Line Help")
+        try:
+            choice = input("\nEnter choice [1-4] (default: 1): ").strip() or "1"
+            if choice == "1":
+                return main(["--auto"])
+            elif choice == "2":
+                from .gui import launch_gui
+                launch_gui()
+                return 0
+            elif choice == "3":
+                user_path = input("Enter video file path: ").strip().strip('"').strip("'")
+                if user_path:
+                    return main([user_path])
+            elif choice == "4":
+                parser.print_help()
+                return 0
+        except (KeyboardInterrupt, EOFError):
+            print("\nExiting.")
+            return 0
 
     parser.print_help()
     return 0
