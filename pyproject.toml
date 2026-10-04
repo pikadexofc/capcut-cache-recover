@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "capcut-cache-recover"
+version = "1.0.0"
+description = "High-performance recovery engine to decrypt and unlock unplayable CapCut & JianYing draft cache videos (BDVE Cryptor Type 1)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Shanto", email = "pikadexofc@users.noreply.github.com" }
+]
+keywords = [
+    "capcut",
+    "jianying",
+    "video-recovery",
+    "bdve",
+    "video-decryption",
+    "moov-atom-not-found",
+    "mp4-recovery",
+    "ffmpeg",
+    "bytedance",
+    "media-recovery"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Developers",
+    "Topic :: Multimedia :: Video",
+    "Topic :: Multimedia :: Video :: Conversion",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/pikadexofc/capcut-cache-recover"
+Repository = "https://github.com/pikadexofc/capcut-cache-recover"
+Issues = "https://github.com/pikadexofc/capcut-cache-recover/issues"
+
+[project.scripts]
+capcut-cache-recover = "capcut_cache_recover.cli:main"
+cc-recover = "capcut_cache_recover.cli:main"
