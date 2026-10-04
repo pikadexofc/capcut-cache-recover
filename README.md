@@ -1,49 +1,70 @@
-# Export Capcut Pro Video Free 🎬🔓
+<div align="center">
+  <a href="https://github.com/pikadexofc">
+    <img src="assets/brand/logo.png" alt="PixelPie Media Logo" width="240" />
+  </a>
+  <br /><br />
+  <h1>Export Capcut Pro Video Free 🎬🔓</h1>
+  <p><strong>A precision cryptographic recovery and export engine that decrypts, unlocks, and exports unplayable CapCut & JianYing draft cache videos with zero re-encoding loss.</strong></p>
 
-[![CI](https://github.com/pikadexofc/export-capcut-pro-video-free/actions/workflows/ci.yml/badge.svg)](https://github.com/pikadexofc/export-capcut-pro-video-free/actions/workflows/ci.yml)
-[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)]()
+  <p>
+    <a href="https://github.com/pikadexofc/export-capcut-pro-video-free/actions">
+      <img src="https://img.shields.io/github/actions/workflow/status/pikadexofc/export-capcut-pro-video-free/ci.yml?branch=main&label=CI&style=flat-square&color=fa7b1e&labelColor=0d1117" alt="CI Status" />
+    </a>
+    <a href="https://github.com/pikadexofc/export-capcut-pro-video-free/releases">
+      <img src="https://img.shields.io/badge/Release-v1.0.0-fa7b1e?style=flat-square&labelColor=0d1117" alt="Version 1.0.0" />
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+      <img src="https://img.shields.io/badge/License-MIT-fa7b1e?style=flat-square&labelColor=0d1117" alt="License MIT" />
+    </a>
+    <img src="https://img.shields.io/badge/Dependencies-0%20(Pure%20Python)-10b981?style=flat-square&labelColor=0d1117" alt="Zero Dependencies" />
+    <img src="https://img.shields.io/badge/Privacy-100%25%20Local-10b981?style=flat-square&labelColor=0d1117" alt="100% Local" />
+  </p>
+</div>
 
-> **Export Capcut Pro Video Free** is a zero-friction recovery and export engine to unlock and export unplayable **CapCut** and **JianYing** draft cache videos (`moov atom not found` / ByteDance `BDVE` Cryptor Type 1). Zero re-encoding, 100% original bitstream quality.
+<div align="center">
+  <img src="assets/brand/colours.png" alt="PixelPie Media Palette" width="100%" height="6" />
+</div>
 
 ---
 
-## ⚡ Zero-Friction Usage (Pick Your Favorite Way)
+## ⚡ Quick Install (Windows PowerShell)
 
-No complex terminal commands or video engineering knowledge needed.
+Run this one-liner in PowerShell to download, configure the desktop drag-and-drop launcher, and register system-wide CLI commands automatically:
 
-### 🖱️ Method 1: Windows 1-Click Launcher & Drag-and-Drop (Easiest)
-
-1. Clone or [download this repo](https://github.com/pikadexofc/export-capcut-pro-video-free/archive/refs/heads/main.zip).
-2. **Drag & Drop**: Drag any unplayable CapCut video file and drop it directly onto **`Export-CapCut-Free.bat`**. It will instantly decrypt and open the exported video!
-3. **Or Double-Click**: Double-click **`Export-CapCut-Free.bat`** to launch the Dark-Mode Visual App!
+```powershell
+irm https://raw.githubusercontent.com/pikadexofc/export-capcut-pro-video-free/main/install.ps1 | iex
+```
 
 ---
 
-### 🎨 Method 2: Modern Dark-Mode GUI (Visual App)
+## 💎 The Three Core Pillars
 
-Launch the visual desktop interface:
+* **Zero Re-Encoding Loss**: Unlike screen recorders or transcoders that degrade bitrates and introduce generational compression artifacts, this engine mathematically inverts the XOR obfuscation in-place. The exact original H.264 NAL units and AAC audio frames are preserved bit-for-bit.
+* **Zero-Friction Ergonomics**: Engineered for video editors and creators. Features a **1-second Windows Drag & Drop launcher**, an **auto-scanning dark-mode desktop GUI**, and an **interactive CLI** that auto-discovers CapCut draft folders without typing paths.
+* **100% Local & Offline**: Operates purely within your local machine sandbox using Python's standard library. Zero cloud uploads, zero telemetry, and zero third-party software dependencies.
 
+---
+
+## 🖱️ Three Ways to Use
+
+### Method 1: Instant Windows Drag & Drop (Easiest)
+1. Drag any unplayable video file (`*_video.mp4`, `.mov`, `.tmp`, or cache block) onto **`Export-CapCut-Free.bat`** on your Desktop.
+2. The engine instantly decrypts the file, checks container atoms, and outputs a clean MP4 right next to the original file.
+
+### Method 2: Modern Dark-Mode GUI (Visual App)
+Double-click **`Export-CapCut-Free.bat`** or run:
 ```bash
-python -m capcut_cache_recover.gui
-# Or after pip install:
 export-capcut-gui
 ```
+* **⚡ 1-Click Auto Scan**: Recursively searches all local and external drives for CapCut / JianYing draft cache folders and exports every video to your Desktop.
+* **📁 Single File Export**: Browse to any draft clip and click **Export Video**. Includes an option to auto-play upon completion.
+* **📂 Open Output Folder**: Instant button to reveal exported files in File Explorer.
 
-- **⚡ 1-Click Auto Scan**: Automatically finds all CapCut and JianYing draft cache folders and exports every video to your Desktop.
-- **📁 Browse & Export**: Select any individual `.mp4` / `.mov` / `.tmp` video and export it with one click.
-- **📂 Open Output Folder**: Instant button to view your rendered MP4s in File Explorer / Finder.
-
----
-
-### 💻 Method 3: Smart Interactive CLI
-
-Simply run without flags:
+### Method 3: Smart Interactive CLI
+Run without arguments to access the guided menu:
 ```bash
-python -m capcut_cache_recover.cli
+export-capcut-pro-video-free
 ```
-You will be prompted with a zero-friction interactive menu:
 ```text
 [?] No arguments provided. Select an option:
     [1] ⚡ 1-Click Auto Scan & Export All CapCut Drafts Free (Recommended)
@@ -55,31 +76,29 @@ You will be prompted with a zero-friction interactive menu:
 Or pass flags directly:
 ```bash
 # Export a single video
-python -m capcut_cache_recover.cli "D:\path\to\encrypted_video.mp4" -o exported.mp4
+export-capcut-pro-video-free "D:\capcut cache\draft\video.mp4" -o exported.mp4
 
-# Auto-detect and export all CapCut drafts
-python -m capcut_cache_recover.cli --auto
+# Auto-detect and export all CapCut drafts across all drives
+export-capcut-pro-video-free --auto
 
-# Scan a specific directory
-python -m capcut_cache_recover.cli --scan "D:\capcut cache\CapCut Drafts" -o "C:\ExportedVideos"
+# Recursively scan a custom directory
+export-capcut-pro-video-free --scan "D:\custom_cache" -o "C:\ExportedVideos"
 ```
 
 ---
 
-## The Problem
+## 🔍 The Problem & Cryptographic Root Cause
 
-Have you ever tried opening a video cached inside CapCut's drafts folder (e.g. `Resources/combination/*_video.mp4` or Pro feature preview scratch files) in VLC, Windows Media Player, QuickTime, Premiere, or FFmpeg, only to get blocked by errors like:
+When CapCut or JianYing (ByteDance) caches draft timelines, combination effects, or Pro feature previews, the files are written with full size on disk (e.g. 30MB–1GB+), but attempting to open them in VLC, Premiere, DaVinci Resolve, QuickTime, or FFmpeg yields:
 
 ```text
 [mov,mp4,m4a,3gp,3g2,mj2 @ 0x...] moov atom not found
 Invalid data found when processing input
 ```
 
-The file exists with its complete multi-megabyte size (e.g. 30MB+), but standard media players cannot open or export it.
+### Why Standard Media Demuxers Fail
 
-### Why Does This Happen?
-
-CapCut and JianYing (ByteDance) protect draft cache clips using a proprietary container obfuscation scheme known as **BDVE (ByteDance Video Encryption) Cryptor Type 1**:
+ByteDance applies **BDVE (ByteDance Video Encryption) Cryptor Type 1** to scratch and cache media:
 1. **Periodic XOR Masking**: CapCut periodically applies a single-byte XOR mask across slices of the media payload (`mdat`). Every `step` bytes, a block of `length` bytes is scrambled with a `key`.
 2. **Proprietary Trailer Box**: A 68-byte custom `bdve` container with a child `crpt` box is appended to the tail of the MP4 file. This box stores the encryption format version and a 32-byte SHA-256 digest:
    $$\text{target} = \text{SHA-256}(\text{step}_{4\text{B}} \parallel \text{length}_{4\text{B}} \parallel \text{key}_{1\text{B}})$$
@@ -87,79 +106,101 @@ CapCut and JianYing (ByteDance) protect draft cache clips using a proprietary co
 
 ---
 
-## ✨ Key Features
+## 🔬 How the Cryptanalysis Engine Works
 
-- ⚡ **Lightning Fast**: Exports a 30 MB 1080p video in under **0.3 seconds**.
-- 💎 **Zero Quality Loss**: Inverts the bitwise scrambling directly. No re-encoding, zero compression artifacts, identical audio/video bitrates.
-- 🖱️ **Drag-and-Drop Launcher**: Includes a native Windows `.bat` launcher for 1-second drag-and-drop export.
-- 🎨 **Modern Dark-Mode GUI**: Zero external GUI dependencies (built on standard Tkinter).
-- 🔍 **Auto-Scan & Batch Export**: Recursively searches disks and draft folders for all encrypted clips.
-- 📦 **Zero Third-Party Dependencies**: Written entirely in pure Python standard library (`pathlib`, `struct`, `hashlib`, `tkinter`).
-- 🛡️ **Built-in MP4 Validator**: Verifies `ftyp`, `mdat`, `moov`, video resolution, and audio tracks automatically without needing FFmpeg installed.
-- 🤖 **Background Daemon Support**: Ships with an autonomous watcher daemon to monitor CapCut folders and auto-export clips as they render.
+```
++-----------------------------------------------------------------------------------+
+|  Raw Cache File (BDVE Obfuscated)                                                 |
+|    ├── ftyp / free [XOR masked with key]                                          |
+|    ├── mdat [Periodic XOR: step bytes cadence, length bytes encrypted]            |
+|    ├── moov [Plaintext metadata: stsz, stsc, stco sample tables]                  |
+|    └── bdve trailer (68B) [crpt box: contains target SHA-256 digest]              |
++-----------------------------------------------------------------------------------+
+                                         │
+                                         ▼
++-----------------------------------------------------------------------------------+
+|  Parameter Constraint Solver (capcut_cache_recover/cryptor.py)                    |
+|    1. Parse moov atom candidate offsets & extract H.264 video sample offsets      |
+|    2. Score H.264 NAL units (SPS, PPS, IDR slices) under XOR vs raw state         |
+|    3. Establish mathematical modulo constraint system:                            |
+|          low = max(pos % step + 1),  high = min(pos % step)                       |
+|    4. Verify candidates: SHA-256(step || length || key) == target_sha256         |
++-----------------------------------------------------------------------------------+
+                                         │
+                                         ▼
++-----------------------------------------------------------------------------------+
+|  Decryption & Container Normalization                                             |
+|    1. Bitwise in-place XOR inversion across matched slice offsets                 |
+|    2. Strip 68-byte proprietary 'bdve' trailer                                    |
+|    3. Zero-reencode MP4 output with 100% original AVC + AAC bitstreams           |
++-----------------------------------------------------------------------------------+
+```
 
 ---
 
-## 💻 Python API Usage
+## ⚙️ Technical Specifications
 
-You can also integrate **Export Capcut Pro Video Free** directly into your Python scripts or automation workflows:
+| Attribute | Specification |
+| :--- | :--- |
+| **Engine Core** | Pure Python 3.9+ (`pathlib`, `struct`, `hashlib`) |
+| **Cryptor Target** | ByteDance BDVE Type 1 (Periodic XOR Masking) |
+| **Throughput** | ~100 MB/s single-threaded bitwise stream inversion |
+| **Re-encoding** | **0% (Bitstream-exact original copy)** |
+| **Container Support** | MP4, MOV, ISO Base Media File Format |
+| **Codecs Supported** | H.264 / AVC, H.265 / HEVC, AAC LC, MP3 |
+| **Platforms** | Windows 10/11, macOS (Apple Silicon & Intel), Linux |
+| **GUI Framework** | Native Tkinter (Zero external GUI frameworks needed) |
+
+---
+
+## 🛠️ Python Programmatic API
+
+Embed the engine directly into automated editing pipelines or microservices:
 
 ```python
 from pathlib import Path
 from capcut_cache_recover import recover_file
 from capcut_cache_recover.validator import validate_mp4
 
-src = Path("encrypted_cache_video.mp4")
-dest = Path("exported_video.mp4")
+src = Path("D:/capcut cache/draft_video.mp4")
+dest = Path("C:/Exported/output.mp4")
 
-# Export and decrypt the file
+# Export and decrypt
 params = recover_file(src, dest)
-print(f"Exported with key=0x{params.key:02X}, step={params.step}, length={params.length}")
+print(f"Decrypted: key=0x{params.key:02X}, step={params.step}, length={params.length}")
 
-# Validate container integrity
-validation = validate_mp4(dest)
-if validation.is_valid:
-    print(f"Valid MP4! Duration: {validation.duration_seconds}s | Resolution: {validation.video_width}x{validation.video_height}")
+# Validate MP4 atoms
+result = validate_mp4(dest)
+if result.is_valid:
+    print(f"Valid Video: {result.duration_seconds}s | {result.video_width}x{result.video_height}")
 ```
 
 ---
 
-## 🔬 Technical Anatomy: BDVE Container Layout
+## 🧪 Verification & Test Suite
 
-```
-+-----------------------------------------------------------------------+
-|  MP4 Header (ftyp, free)  [Partially / fully masked with XOR key]     |
-+-----------------------------------------------------------------------+
-|  Media Data Payload (mdat)                                            |
-|    - Block 0:  [0 : length]  -> XORed with key                        |
-|    - Block 0:  [length : step] -> Plaintext unencrypted               |
-|    - Block 1:  [step : step + length] -> XORed with key               |
-|    - Block 1:  [step + length : 2*step] -> Plaintext unencrypted      |
-|    ...                                                                |
-+-----------------------------------------------------------------------+
-|  Movie Box (moov)  [Plaintext or candidate offset]                    |
-+-----------------------------------------------------------------------+
-|  ByteDance Trailer Box (bdve) [68 Bytes]                              |
-|    ├── Child Atom: 'crpt' (48 bytes)                                  |
-|    │     ├── Cryptor Type: 0x00000001 (Type 1 Periodic XOR)           |
-|    │     ├── Version:      0x00000003                                 |
-|    │     └── SHA-256:      32-byte digest of (step || length || key)  |
-|    └── Child Atom: 'size' (12 bytes) -> Total trailer size (68)       |
-+-----------------------------------------------------------------------+
-```
-
----
-
-## 🧪 Running Tests
-
-A comprehensive unit test suite is included:
+The repository includes automated unit tests covering cryptographic parameter derivation, synthetic container detection, and atom validation:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+All pushes and pull requests are verified via continuous integration matrix testing across Ubuntu, macOS, and Windows.
 
 ---
 
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE) © 2026 Shanto ([@pikadexofc](https://github.com/pikadexofc)).
+
+---
+
+<div align="center">
+  <a href="https://github.com/pikadexofc">
+    <img src="assets/brand/logo.png" alt="PixelPie Media Logo" width="160" />
+  </a>
+  <p style="margin-top: 8px;"><b>Export Capcut Pro Video Free</b> is engineered and maintained by <b>PixelPie Media</b>.</p>
+  <p><i>Precision software engineering, spatial design, and local-first privacy systems.</i></p>
+  <br />
+  <img src="assets/brand/colours.png" alt="PixelPie Media Palette" width="100%" height="6" />
+</div>
