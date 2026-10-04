@@ -46,7 +46,7 @@ def format_size(num_bytes: int) -> str:
 class ExportCapcutProApp:
     def __init__(self, root: tk.Tk, initial_file: str | None = None):
         self.root = root
-        self.root.title("Export Capcut Pro Video Free  •  PixelPie Media")
+        self.root.title("CapCut Cache Recover  •  PixelPie Media")
         self.root.geometry("840x650")
         self.root.minsize(740, 580)
         self.root.configure(bg="#0d1117")
@@ -139,7 +139,7 @@ class ExportCapcutProApp:
 
         title_lbl = tk.Label(
             header_left,
-            text="Export Capcut Pro Video Free",
+            text="CapCut Cache Recover",
             font=("Segoe UI", 15, "bold"),
             fg=self.text_main,
             bg=self.bg_root,
@@ -586,8 +586,8 @@ class ExportCapcutProApp:
         tk.Label(about_card, text="Precision Software Engineering & Systems Design", font=("Segoe UI", 9), fg=self.text_muted, bg=self.bg_card).pack(anchor="w", pady=(0, 16))
 
         info_text = (
-            "Export Capcut Pro Video Free is a zero-friction reverse-engineering utility\n"
-            "designed to unlock and decrypt unplayable CapCut & JianYing draft cache videos.\n\n"
+            "CapCut Cache Recover is a zero-friction forensic recovery utility\n"
+            "designed to salvage and repair unplayable CapCut & JianYing draft cache videos.\n\n"
             "• Primary Developer:  Md. Zobaed Islam Shanto\n"
             "• Organization:       PixelPie Media\n"
             "• Core Architecture:  BDVE Type 1 Periodic XOR Cryptanalysis Solver\n"

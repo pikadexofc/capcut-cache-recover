@@ -32,6 +32,24 @@ def get_default_draft_paths() -> List[Path]:
         home = Path.home()
         paths.append(home / "Movies" / "CapCut" / "User Data" / "Projects" / "com.lveditor.draft")
         paths.append(home / "Movies" / "JianyingPro" / "User Data" / "Projects" / "com.lveditor.draft")
+    elif "android" in sys.platform.lower() or os.path.exists("/data/data/com.termux") or os.path.exists("/storage/emulated/0"):
+        # Android & Termux mobile draft paths
+        base_storage = Path("/storage/emulated/0")
+        termux_storage = Path.home() / "storage"
+
+        android_roots = [
+            base_storage / "Android/data/com.lemon.lvoverseas/files/newdrafts",
+            base_storage / "Android/data/com.lemon.lvoverseas/files/draft",
+            base_storage / "Android/data/com.jianying.mobile/files/newdrafts",
+            base_storage / "DCIM/CapCut",
+            base_storage / "Movies/CapCut",
+            base_storage / "Download",
+            termux_storage / "shared/Android/data/com.lemon.lvoverseas/files/newdrafts",
+            termux_storage / "dcim/CapCut",
+            termux_storage / "movies/CapCut",
+            termux_storage / "downloads",
+        ]
+        paths.extend(android_roots)
 
     return [p for p in paths if p.exists()]
 

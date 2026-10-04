@@ -153,10 +153,10 @@ def interactive_select_draft(items: list[RecentDraftItem]) -> Optional[RecentDra
         # Clear screen and draw menu header
         os.system("cls" if os.name == "nt" else "clear")
         print("========================================================================")
-        print("   EXPORT CAPCUT PRO VIDEO FREE  -  INTERACTIVE DRAFT SELECTOR")
-        print("   Use [UP / DOWN] arrow keys to navigate, [ENTER] to export, [Q] to quit")
+        print("   CAPCUT CACHE RECOVER  -  INTERACTIVE DRAFT SELECTOR")
+        print("   Use [UP / DOWN] arrow keys to navigate, [ENTER] to recover, [Q] to quit")
         print("========================================================================\n")
-        print(f"Detected {total} recent protected CapCut & JianYing draft video(s):\n")
+        print(f"Detected {total} recent CapCut & JianYing draft cache(s):\n")
 
         for idx, item in enumerate(items):
             is_active = (idx == selected_index)

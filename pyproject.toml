@@ -3,28 +3,27 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "export-capcut-pro-video-free"
+name = "capcut-cache-recover"
 version = "1.0.1"
-description = "Export Capcut Pro Video Free - High-performance recovery engine to decrypt, unlock, and export unplayable CapCut & JianYing draft cache videos."
+description = "CapCut Cache Recover - Forensic video stream recovery and cache salvage engine for CapCut & JianYing draft caches."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
 authors = [
-    { name = "Shanto", email = "pikadexofc@users.noreply.github.com" }
+    { name = "PixelPie Media (Md. Zobaed Islam Shanto)", email = "pikadexofc@users.noreply.github.com" }
 ]
 keywords = [
-    "export-capcut-pro-video-free",
-    "capcut-pro",
-    "capcut-free",
-    "capcut-pro-free",
+    "capcut-cache-recover",
     "capcut",
     "jianying",
-    "video-recovery",
+    "forensic-recovery",
+    "video-repair",
+    "stream-recovery",
     "bdve",
-    "video-decryption",
+    "bdve-type1",
     "moov-atom-not-found",
     "mp4-recovery",
-    "ffmpeg",
+    "multimedia",
     "bytedance"
 ]
 classifiers = [
@@ -47,10 +46,10 @@ Repository = "https://github.com/pikadexofc/export-capcut-pro-video-free"
 Issues = "https://github.com/pikadexofc/export-capcut-pro-video-free/issues"
 
 [project.scripts]
+capcut-cache-recover = "capcut_cache_recover.cli:main"
+capcut-gui = "capcut_cache_recover.gui:launch_gui"
 export-capcut-pro-video-free = "capcut_cache_recover.cli:main"
 export-capcut-gui = "capcut_cache_recover.gui:launch_gui"
-capcut-pro-free = "capcut_cache_recover.cli:main"
-capcut-cache-recover = "capcut_cache_recover.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]

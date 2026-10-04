@@ -4,7 +4,6 @@ from PyInstaller.utils.hooks import collect_data_files
 datas = []
 datas += collect_data_files('tkinterdnd2')
 
-
 a = Analysis(
     ['launcher.py'],
     pathex=[],
@@ -26,7 +25,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='Export-CapCut-Pro-Free',
+    name='CapCut-Cache-Recover',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -39,4 +38,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    version='version_info.txt',
 )

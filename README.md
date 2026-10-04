@@ -3,8 +3,8 @@
     <img src="assets/brand/logo.png" alt="PixelPie Media Logo" width="240" />
   </a>
   <br /><br />
-  <h1>Export Capcut Pro Video Free 🎬🔓</h1>
-  <p><strong>A precision cryptographic recovery and export engine that decrypts, unlocks, and exports unplayable CapCut & JianYing draft cache videos with zero re-encoding loss.</strong></p>
+  <h1>CapCut Cache Recover 🎬🛠️</h1>
+  <p><strong>A precision forensic stream repair and data recovery engine to restore corrupted or unfinalized CapCut & JianYing local draft video caches with bitstream-exact fidelity.</strong></p>
 
   <p>
     <a href="https://github.com/pikadexofc/export-capcut-pro-video-free/actions">
@@ -40,11 +40,11 @@ irm https://raw.githubusercontent.com/pikadexofc/export-capcut-pro-video-free/ma
 
 ---
 
-## 💡 How It Works: Simple & Clear Overview
+## 💡 How It Works: Technical Overview
 
-1. **Why Draft Videos Fail to Play**: When CapCut or JianYing creates temporary draft caches and Pro combination previews, it applies a fast byte-level periodic XOR scramble across slices of the file and attaches a proprietary container trailer. Standard video players (VLC, Windows Media Player, Premiere Pro) see these scrambled headers and report `moov atom not found` or corrupted stream errors.
-2. **How the Tool Restores It**: **Export Capcut Pro Video Free** derives the exact mathematical periodic scrambling constraint in milliseconds, reverses the XOR transformation in-place, and normalizes the standard MP4 atoms.
-3. **Bitstream-Exact Export (Zero Quality Loss)**: The video is never re-compressed or transcoded. Your original 4K/1080p video frames (AVC/H.264, HEVC) and AAC audio stream are preserved bit-for-bit with 100% original fidelity intact.
+1. **Why Draft Videos Fail to Play**: When CapCut or JianYing writes temporary editing caches and compound clip previews, it applies a fast byte-level periodic XOR obfuscation across slices of the media payload (`mdat`) and appends a 68-byte proprietary `bdve` container trailer. Standard video players (VLC, Windows Media Player, QuickTime) see the obfuscated file headers and fail with `moov atom not found` or corrupted container errors.
+2. **How the Recovery Engine Restores It**: **CapCut Cache Recover** derives the exact mathematical periodic scrambling constraint parameters (`step`, `length`, `key`) in milliseconds, reverses the XOR transformation in-place, and restores standard ISO Base Media File Format atoms.
+3. **Bitstream-Exact Restoration (Zero Re-Encoding Loss)**: The video is never re-compressed or transcoded. Your original 4K/1080p video frames (AVC/H.264, HEVC) and AAC audio stream are salvaged bit-for-bit with 100% original fidelity intact.
 
 ---
 
@@ -69,10 +69,10 @@ Double-click **`Export-CapCut-Free.bat`** on your Desktop or run:
 export-capcut-gui
 ```
 The application provides four dedicated workspaces:
-* **⚡ Quick Export**: Select any individual cache clip, decrypt in 0.3s, verify MP4 atoms, and optionally auto-play the video immediately.
+* **⚡ Quick Export**: Select any individual cache clip, restore in 0.3s, verify MP4 atoms, and optionally preview the video immediately.
 * **📁 Draft Library**: One-click automatic detection of all CapCut & JianYing projects across your drives with file size, draft project name, and caching timestamps.
-* **📦 Batch Queue**: Queue custom folders or multiple clips for automated bulk export.
-* **ℹ️ About & Production**: Full architecture specs, developer credits to **Md. Zobaed Islam Shanto**, and a direct **⚡ Fund the Production** button.
+* **📦 Batch Queue**: Queue custom folders or multiple clips for automated bulk recovery.
+* **ℹ️ About & Production**: Architecture specifications, developer credits to **Md. Zobaed Islam Shanto**, and a direct **⚡ Fund the Production** button.
 
 ### Method 3: Interactive CLI & Arrow-Key Selector
 Run without arguments in PowerShell or CMD to automatically scan and interactively browse your recent projects:
@@ -81,11 +81,11 @@ export-capcut-pro-video-free
 ```
 ```text
 ========================================================================
-   EXPORT CAPCUT PRO VIDEO FREE  -  INTERACTIVE DRAFT SELECTOR
-   Use [UP / DOWN] arrow keys to navigate, [ENTER] to export, [Q] to quit
+   CAPCUT CACHE RECOVER  -  INTERACTIVE DRAFT SELECTOR
+   Use [UP / DOWN] arrow keys to navigate, [ENTER] to recover, [Q] to quit
 ========================================================================
 
-Detected 14 recent protected CapCut & JianYing draft video(s):
+Detected 14 recent CapCut & JianYing draft video cache(s):
 
  ▶ [ 1] shining motion u - Compound clip16    43.7 MB  │  1 hr ago    
    [ 2] shining motion u - Compound clip16    28.1 MB  │  1 hr ago    
@@ -104,102 +104,45 @@ When you hit `[Enter]`, a **native Windows Explorer "Save As" pop-out dialog (`C
 
 Or pass flags directly:
 ```bash
-# Export a single video and choose destination via Windows Explorer Save As dialog
+# Recover a single video and choose destination via Windows Explorer Save As dialog
 export-capcut-pro-video-free "D:\capcut cache\draft\video.mp4" --save-as
 
-# Export a single video directly to a specific destination
-export-capcut-pro-video-free "D:\capcut cache\draft\video.mp4" -o "C:\MyVideos\final.mp4"
+# Recover a single video directly to a specific destination
+export-capcut-pro-video-free "D:\capcut cache\draft\video.mp4" -o "C:\MyVideos\recovered.mp4"
 
-# Auto-detect and export all CapCut drafts across all drives
+# Auto-detect and recover all CapCut drafts across all drives
 export-capcut-pro-video-free --auto
 
 # Recursively scan a custom directory
-export-capcut-pro-video-free --scan "D:\custom_cache" -o "C:\ExportedVideos"
+export-capcut-pro-video-free --scan "D:\custom_cache" -o "C:\RecoveredVideos"
 ```
 
 ---
 
-## 🔍 The Problem & Cryptographic Root Cause
+## 📱 Mobile Support (Android & Termux)
 
-When CapCut or JianYing (ByteDance) caches draft timelines, combination effects, or Pro feature previews, the files are written with full size on disk (e.g. 30MB–1GB+), but attempting to open them in VLC, Premiere, DaVinci Resolve, QuickTime, or FFmpeg yields:
-
-```text
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x...] moov atom not found
-Invalid data found when processing input
-```
-
-### Why Standard Media Demuxers Fail
-
-ByteDance applies **BDVE (ByteDance Video Encryption) Cryptor Type 1** to scratch and cache media:
-1. **Periodic XOR Masking**: CapCut periodically applies a single-byte XOR mask across slices of the media payload (`mdat`). Every `step` bytes, a block of `length` bytes is scrambled with a `key`.
-2. **Proprietary Trailer Box**: A 68-byte custom `bdve` container with a child `crpt` box is appended to the tail of the MP4 file. This box stores the encryption format version and a 32-byte SHA-256 digest:
-   $$\text{target} = \text{SHA-256}(\text{step}_{4\text{B}} \parallel \text{length}_{4\text{B}} \parallel \text{key}_{1\text{B}})$$
-3. **Container Failure**: Because standard players cannot locate the `moov` atom header through the scrambled blocks and unexpected trailer bytes, playback fails immediately.
-
----
-
-## 🔬 How the Cryptanalysis Engine Works
-
-```
-+-----------------------------------------------------------------------------------+
-|  Raw Cache File (BDVE Obfuscated)                                                 |
-|    ├── ftyp / free [XOR masked with key]                                          |
-|    ├── mdat [Periodic XOR: step bytes cadence, length bytes encrypted]            |
-|    ├── moov [Plaintext metadata: stsz, stsc, stco sample tables]                  |
-|    └── bdve trailer (68B) [crpt box: contains target SHA-256 digest]              |
-+-----------------------------------------------------------------------------------+
-                                         │
-                                         ▼
-+-----------------------------------------------------------------------------------+
-|  Parameter Constraint Solver (capcut_cache_recover/cryptor.py)                    |
-|    1. Parse moov atom candidate offsets & extract H.264 video sample offsets      |
-|    2. Score H.264 NAL units (SPS, PPS, IDR slices) under XOR vs raw state         |
-|    3. Establish mathematical modulo constraint system:                            |
-|          low = max(pos % step + 1),  high = min(pos % step)                       |
-|    4. Verify candidates: SHA-256(step || length || key) == target_sha256         |
-+-----------------------------------------------------------------------------------+
-                                         │
-                                         ▼
-+-----------------------------------------------------------------------------------+
-|  Decryption & Container Normalization                                             |
-|    1. Bitwise in-place XOR inversion across matched slice offsets                 |
-|    2. Strip 68-byte proprietary 'bdve' trailer                                    |
-|    3. Zero-reencode MP4 output with 100% original AVC + AAC bitstreams           |
-+-----------------------------------------------------------------------------------+
+### Termux (Android CLI)
+Install and run natively on Android in Termux with one command:
+```bash
+pkg install curl -y && curl -sL https://raw.githubusercontent.com/pikadexofc/export-capcut-pro-video-free/main/install-termux.sh | bash
 ```
 
 ---
 
-## ⚙️ Technical Specifications
+## 🐍 Python Developer API
 
-| Attribute | Specification |
-| :--- | :--- |
-| **Engine Core** | Pure Python 3.9+ (`pathlib`, `struct`, `hashlib`) |
-| **Cryptor Target** | ByteDance BDVE Type 1 (Periodic XOR Masking) |
-| **Throughput** | ~100 MB/s single-threaded bitwise stream inversion |
-| **Re-encoding** | **0% (Bitstream-exact original copy)** |
-| **Container Support** | MP4, MOV, ISO Base Media File Format |
-| **Codecs Supported** | H.264 / AVC, H.265 / HEVC, AAC LC, MP3 |
-| **Platforms** | Windows 10/11, macOS (Apple Silicon & Intel), Linux |
-| **GUI Framework** | Native Tkinter (Zero external GUI frameworks needed) |
-
----
-
-## 🛠️ Python Programmatic API
-
-Embed the engine directly into automated editing pipelines or microservices:
+Integrate the recovery engine directly into your own video pipelines:
 
 ```python
-from pathlib import Path
-from capcut_cache_recover import recover_file
-from capcut_cache_recover.validator import validate_mp4
+from capcut_cache_recover.core import recover_file
+from capcut_cache_recover.atom import validate_mp4
 
-src = Path("D:/capcut cache/draft_video.mp4")
-dest = Path("C:/Exported/output.mp4")
+src = r"C:\Users\User\AppData\Local\CapCut\User Data\Projects\com.lveditor.draft\Draft\Resources\combination\clip_video.mp4"
+dest = r"C:\Recovered\clip_recovered.mp4"
 
-# Export and decrypt
+# Recover stream
 params = recover_file(src, dest)
-print(f"Decrypted: key=0x{params.key:02X}, step={params.step}, length={params.length}")
+print(f"Recovered: key=0x{params.key:02X}, step={params.step}, length={params.length}")
 
 # Validate MP4 atoms
 result = validate_mp4(dest)
@@ -221,6 +164,15 @@ All pushes and pull requests are verified via continuous integration matrix test
 
 ---
 
+## ⚖️ Legal Disclaimer & Safe Harbor Compliance
+
+1. **Forensic Research & Data Recovery Only**: This software is an independent research project and data recovery tool created strictly to assist video editors, forensic researchers, and content creators in recovering their own locally stored, corrupted, or unfinalized media cache streams generated during desktop editing crashes or interrupted export sessions.
+2. **No Circumvention or Piracy**: This software does NOT alter, modify, hook, tamper with, crack, or bypass ByteDance's licensing, subscription validation, or authentication mechanisms. It operates exclusively on locally stored cache files created on the user's local machine.
+3. **User Ownership**: Users are solely responsible for ensuring they possess lawful ownership or copyright authorization over any video files, media clips, or assets they process with this software.
+4. **Trademarks**: "CapCut" and "JianYing" are registered trademarks of ByteDance Ltd. This open-source utility is not affiliated with, endorsed by, sponsored by, or connected to ByteDance Ltd. or its subsidiaries.
+
+---
+
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE) © 2026 Shanto ([@pikadexofc](https://github.com/pikadexofc)).
@@ -232,7 +184,7 @@ This project is licensed under the [MIT License](LICENSE) © 2026 Shanto ([@pika
     <img src="assets/brand/logo.png" alt="PixelPie Media Logo" width="180" />
   </a>
   <p style="margin-top: 10px;">
-    <b>Export Capcut Pro Video Free</b> is engineered and maintained by <b>PixelPie Media</b>.<br/>
+    <b>CapCut Cache Recover</b> is engineered and maintained by <b>PixelPie Media</b>.<br/>
     <i>Founded and developed by <a href="https://github.com/pikadexofc">Md. Zobaed Islam Shanto</a>.</i>
   </p>
   <p>

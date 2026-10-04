@@ -17,8 +17,8 @@ from .selector import scan_recent_drafts, interactive_select_draft, prompt_windo
 
 BANNER = r"""
 ========================================================================
-   EXPORT CAPCUT PRO VIDEO FREE  -  v""" + __version__ + r"""
-   Unlock, Decrypt & Export Protected CapCut & JianYing Draft Videos
+   CAPCUT CACHE RECOVER  -  v""" + __version__ + r"""
+   Forensic Stream Recovery & Cache Salvage for CapCut & JianYing
 ========================================================================
 """
 
@@ -33,8 +33,8 @@ def format_size(num_bytes: int) -> str:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
-        prog="export-capcut-pro-video-free",
-        description="Export Capcut Pro Video Free: Recover and export unplayable CapCut & JianYing draft cache videos (BDVE Cryptor Type 1).",
+        prog="capcut-cache-recover",
+        description="CapCut Cache Recover: Forensic stream repair and salvage utility for CapCut & JianYing draft caches (BDVE Cryptor Type 1).",
     )
     parser.add_argument(
         "input",
@@ -195,7 +195,7 @@ def main(argv=None) -> int:
             save_dest = prompt_windows_save_dialog(
                 suggested_filename=meta.suggested_filename,
                 initial_dir=src.parent,
-                title="Export Capcut Pro Video Free - Choose Destination"
+                title="CapCut Cache Recover - Choose Destination"
             )
             if not save_dest:
                 print("[-] Export cancelled by user.")
@@ -255,11 +255,22 @@ def main(argv=None) -> int:
                 save_dest = prompt_windows_save_dialog(
                     suggested_filename=chosen.meta.suggested_filename,
                     initial_dir=Path.home() / "Desktop" / "Exported_CapCut_Videos",
-                    title="Export Capcut Pro Video Free - Save Video As"
+                    title="CapCut Cache Recover - Save Video As"
                 )
                 if not save_dest:
-                    print("[-] Save cancelled by user.")
-                    return 0
+                    if sys.platform.startswith("win"):
+                        print("[-] Save cancelled by user.")
+                        return 0
+                    else:
+                        # Mobile / Termux storage fallback
+                        out_folder = Path.cwd() / "exported_capcut_videos"
+                        if Path("/storage/emulated/0/Movies").exists():
+                            out_folder = Path("/storage/emulated/0/Movies/Exported_CapCut")
+                        elif (Path.home() / "storage/movies").exists():
+                            out_folder = Path.home() / "storage/movies/Exported_CapCut"
+                        out_folder.mkdir(parents=True, exist_ok=True)
+                        save_dest = out_folder / chosen.meta.suggested_filename
+                        print(f"[*] Saving to: {save_dest}")
 
                 dest = save_dest
                 src = chosen.path

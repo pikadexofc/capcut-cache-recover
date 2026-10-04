@@ -1,10 +1,10 @@
-# install.ps1 - Safe, transparent installer for Export Capcut Pro Video Free
+# install.ps1 - Safe, transparent installer for CapCut Cache Recover
 # Built by PixelPie Media
 $ErrorActionPreference = 'Stop'
 
 Write-Host ""
 Write-Host "======================================================" -ForegroundColor DarkYellow
-Write-Host "   🎬 Export Capcut Pro Video Free - Quick Setup" -ForegroundColor Yellow
+Write-Host "   🎬 CapCut Cache Recover - Quick Setup" -ForegroundColor Yellow
 Write-Host "   PixelPie Media • Precision Software Engineering" -ForegroundColor DarkGray
 Write-Host "======================================================" -ForegroundColor DarkYellow
 Write-Host ""
@@ -17,9 +17,9 @@ if (-not $pythonInstalled) {
     exit 1
 }
 
-$targetDir = "$env:LOCALAPPDATA\export-capcut-pro-video-free"
+$targetDir = "$env:LOCALAPPDATA\capcut-cache-recover"
 $zipUrl = "https://github.com/pikadexofc/export-capcut-pro-video-free/archive/refs/heads/main.zip"
-$zipFile = "$env:TEMP\export-capcut-pro-video-free.zip"
+$zipFile = "$env:TEMP\capcut-cache-recover.zip"
 
 Write-Host "[1/3] Downloading latest release from GitHub..." -ForegroundColor Cyan
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -35,8 +35,8 @@ Move-Item "$env:TEMP\cc_extract\export-capcut-pro-video-free-main\*" $targetDir 
 Remove-Item -Recurse -Force "$env:TEMP\cc_extract", $zipFile
 
 Write-Host "[3/3] Setting up desktop drag-and-drop launcher..." -ForegroundColor Cyan
-$desktopLauncher = [System.IO.Path]::Combine([Environment]::GetFolderPath('Desktop'), 'Export-CapCut-Free.bat')
-Copy-Item "$targetDir\Export-CapCut-Free.bat" $desktopLauncher -Force
+$desktopLauncher = [System.IO.Path]::Combine([Environment]::GetFolderPath('Desktop'), 'CapCut-Cache-Recover.bat')
+Copy-Item "$targetDir\CapCut-Cache-Recover.bat" $desktopLauncher -Force
 
 # Editable install for Python
 Write-Host "[*] Registering system-wide CLI command..." -ForegroundColor Cyan
@@ -47,8 +47,8 @@ Write-Host "======================================================" -ForegroundC
 Write-Host "  ✅ Installation Complete!" -ForegroundColor Green
 Write-Host "======================================================" -ForegroundColor Green
 Write-Host "• Desktop Launcher ready at: $desktopLauncher" -ForegroundColor White
-Write-Host "• CLI command active: export-capcut-pro-video-free" -ForegroundColor White
-Write-Host "• GUI command active: export-capcut-gui" -ForegroundColor White
+Write-Host "• CLI command active: capcut-cache-recover" -ForegroundColor White
+Write-Host "• GUI command active: capcut-gui" -ForegroundColor White
 Write-Host ""
-Write-Host "Simply drag any unplayable CapCut video onto the Desktop icon!" -ForegroundColor Yellow
+Write-Host "Simply drag any unplayable CapCut video cache onto the Desktop icon!" -ForegroundColor Yellow
 Write-Host ""

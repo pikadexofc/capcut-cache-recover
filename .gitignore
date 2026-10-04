@@ -35,3 +35,9 @@ recovered/
 scripts/daemons/llm_client.py
 scripts/daemons/generated_marketing/
 *.env
+
+# Flutter Mobile Builds
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins*
+mobile/.pub*

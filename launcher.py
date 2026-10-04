@@ -1,4 +1,4 @@
-"""Standalone single-file unified launcher for Export Capcut Pro Video Free.
+"""Standalone single-file unified launcher for CapCut Cache Recover.
 
 Handles both GUI launch on double-click and Drag-and-Drop / CLI processing when arguments are passed.
 """

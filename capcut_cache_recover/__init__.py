@@ -1,9 +1,6 @@
-"""Export Capcut Pro Video Free - High-performance recovery engine to decrypt, unlock, and export unplayable CapCut & JianYing draft cache videos."""
+"""CapCut Cache Recover - Forensic video stream recovery and cache salvage engine for CapCut & JianYing draft caches."""
 
 __version__ = "1.0.1"
-__tool_name__ = "Export Capcut Pro Video Free"
-__author__ = "Shanto (pikadexofc)"
+__tool_name__ = "CapCut Cache Recover"
+__author__ = "PixelPie Media (Md. Zobaed Islam Shanto)"
 __license__ = "MIT"
-
-from .cryptor import recover_file, recover_bytes, CryptorParams
-from .scanner import find_encrypted_videos
