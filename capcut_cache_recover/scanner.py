@@ -94,6 +94,10 @@ def get_default_draft_paths() -> List[Path]:
             if os.path.exists(drive):
                 add_path(Path(f"{drive}capcut cache\\CapCut Drafts"))
                 add_path(Path(f"{drive}CapCut Drafts"))
+                add_path(Path(f"{drive}capcut cache\\JianyingPro Presets\\Combination\\Resources"))
+                add_path(Path(f"{drive}capcut cache\\JianyingPro Presets"))
+                add_path(Path(f"{drive}capcut cache\\CapCut Materials"))
+                add_path(Path(f"{drive}capcut cache\\JianyingPro Prerender"))
                 add_path(Path(f"{drive}capcut cache"))
                 add_path(Path(f"{drive}CapCut"))
 

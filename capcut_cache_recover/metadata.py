@@ -112,6 +112,26 @@ def resolve_capcut_metadata(video_path: Path) -> ProjectMetadata:
                 except Exception:
                     pass
 
+    # Step 4.5: Check for JianYing / CapCut Combination Presets mapping
+    if not project_name:
+        for candidate_parent in (video_path.parent, video_path.parent.parent):
+            presets_dir = candidate_parent.parent / "Presets" if candidate_parent.name in ("Resources", "Combination") else candidate_parent / "Presets"
+            if presets_dir.exists():
+                stem = video_path.stem
+                try:
+                    for p_folder in presets_dir.iterdir():
+                        if p_folder.is_dir():
+                            draft_json = p_folder / "preset_draft" / "draft_content.json"
+                            if draft_json.exists():
+                                txt = draft_json.read_text(encoding="utf-8")
+                                if stem in txt:
+                                    project_name = p_folder.name
+                                    break
+                except Exception:
+                    pass
+                if project_name:
+                    break
+
     # Step 5: Final fallbacks
     if not project_name and draft_folder:
         project_name = draft_folder.name
