@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapCut Cache Recover — In-Browser Forensic Stream Salvager</title>
+  <meta name="description" content="100% local, client-side in-browser recovery tool for corrupted CapCut & JianYing draft cache videos (BDVE Type 1). Zero re-encoding loss. Zero server uploads.">
+  <meta name="theme-color" content="#0B0F14">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="logo-badge">🎬</div>
+        <div class="brand-text">
+          <span class="brand-title">CapCut Cache Recover</span>
+          <span class="brand-sub">PixelPie Media</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="https://github.com/pikadexofc/export-capcut-pro-video-free" target="_blank" rel="noopener" class="nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://github.com/pikadexofc/export-capcut-pro-video-free/releases" target="_blank" rel="noopener" class="nav-link badge-release">
+          v1.0.2 Live
+        </a>
+        <a href="https://mdzobaedislamshanto.supportkori.shop/" target="_blank" rel="noopener" class="btn-support">
+          ⚡ Fund the Production
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Content -->
+    <main class="main-content">
+      <div class="hero-section">
+        <div class="pill-badge">
+          <span class="pulse-dot"></span> 100% Client-Side • Zero Server Upload • Instant Offline Decryption
+        </div>
+        <h1 class="hero-title">Recover Corrupted CapCut Draft Video Caches</h1>
+        <p class="hero-desc">
+          Restore unplayable CapCut & JianYing draft cache videos (<code>BDVE Type 1</code>) directly in your browser. 
+          Zero re-encoding loss, bitstream-exact AVC/H.264 restoration in seconds.
+        </p>
+      </div>
+
+      <!-- Drag & Drop Card -->
+      <div class="recovery-card" id="dropZone">
+        <input type="file" id="fileInput" accept=".mp4,.mov,.tmp,.cache" style="display:none;">
+        
+        <div class="drop-state" id="emptyState">
+          <div class="icon-orb">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h3 class="drop-title">Drop your CapCut cache video here</h3>
+          <p class="drop-subtitle">or <button type="button" class="btn-browse" id="btnBrowse">browse files</button> from your computer</p>
+          <div class="drop-hints">
+            <span>Supports <code>*_video.mp4</code></span>
+            <span>•</span>
+            <span><code>.mov</code></span>
+            <span>•</span>
+            <span><code>.tmp</code> cache</span>
+          </div>
+        </div>
+
+        <!-- Selected File State -->
+        <div class="selected-state" id="selectedState" style="display: none;">
+          <div class="file-info-row">
+            <div class="file-icon">📼</div>
+            <div class="file-meta">
+              <div class="file-name" id="fileName">example_video.mp4</div>
+              <div class="file-size" id="fileSize">0 MB</div>
+            </div>
+            <button type="button" class="btn-reset" id="btnReset" title="Change file">✕</button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-row">
+            <button type="button" class="btn-primary" id="btnStartRecover">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              Recover Video Stream
+            </button>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-status-row">
+              <span id="progressText">Inverting periodic XOR bitstream...</span>
+              <span id="progressPercent">0%</span>
+            </div>
+          </div>
+
+          <!-- Terminal Output -->
+          <div class="terminal-box" id="terminalBox">
+            <div class="terminal-header">
+              <span class="term-dot dot-red"></span>
+              <span class="term-dot dot-yellow"></span>
+              <span class="term-dot dot-green"></span>
+              <span class="term-title">BDVE Cryptanalysis Console</span>
+            </div>
+            <div class="terminal-body" id="termLogs">
+              <div class="log-line text-muted">Ready to analyze media stream...</div>
+            </div>
+          </div>
+
+          <!-- Result Box -->
+          <div class="result-box" id="resultBox" style="display: none;">
+            <div class="success-header">
+              <span class="check-icon">✓</span>
+              <div>
+                <h4>Stream Recovered Successfully!</h4>
+                <p>Clean ISO Base Media container restored with zero generational quality loss.</p>
+              </div>
+            </div>
+            
+            <video id="videoPreview" class="video-preview" controls playsinline></video>
+
+            <div class="download-row">
+              <a id="btnDownload" class="btn-download" download="recovered_video.mp4">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download Clean MP4
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Grid -->
+      <section class="features-grid">
+        <div class="feature-card">
+          <div class="feat-icon">🔒</div>
+          <h3>100% Client-Side Security</h3>
+          <p>Decryption happens directly in your browser's RAM via JavaScript TypedArrays. Not a single byte of your video ever leaves your computer.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">⚡</div>
+          <h3>Bitstream-Exact Restoration</h3>
+          <p>No re-encoding or transcoding compression. Original AVC/H.264 NAL units and AAC audio frames are preserved bit-for-bit with 100% quality.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📱</div>
+          <h3>Works Across All Platforms</h3>
+          <p>Runs smoothly on Windows, macOS, Linux, ChromeOS, iPad, iPhone, and Android without installing any software or browser extensions.</p>
+        </div>
+      </section>
+
+      <!-- Technical Overview -->
+      <section class="tech-section">
+        <h3>How It Works: BDVE Type 1 Cryptanalysis</h3>
+        <p>
+          CapCut and JianYing scramble local video caches using periodic XOR slicing across media chunks (<code>step=49435</code>, <code>length=18115</code>, <code>key=0x3B</code>) and append a 68-byte custom metadata box. Standard media players fail to parse the container headers. 
+          This tool mathematically solves the modulo constraints against the trailer's SHA-256 digest and reverses the periodic XOR transformation in real-time.
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>
+          Engineered by <strong>Md. Zobaed Islam Shanto</strong> • Developed under <strong>PixelPie Media</strong>
+        </p>
+        <p class="legal-text">
+          Independent forensic recovery research. Governed under 17 U.S.C. § 1201(f) reverse engineering for file format interoperability. Not affiliated with ByteDance Ltd.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -49,12 +49,40 @@ class RecentDraftItem:
             return time.strftime("%b %d, %Y", time.localtime(self.mtime))
 
 
-def scan_recent_drafts(limit: int = 12) -> list[RecentDraftItem]:
-    """Scans all known CapCut & JianYing draft folders and returns items sorted by most recent."""
-    roots = get_default_draft_paths()
+from .scanner import (
+    find_encrypted_videos,
+    get_default_draft_paths,
+    discover_capcut_projects,
+    get_project_encrypted_clips,
+)
+
+
+def scan_recent_drafts(limit: int = 20) -> list[RecentDraftItem]:
+    """Scans discovered CapCut projects and draft roots, returning items sorted by most recent."""
     found_files: list[Path] = []
-    for r in roots:
-        found_files.extend(find_encrypted_videos(r))
+    seen: set[str] = set()
+
+    # Step 1: Fast scan across discovered projects (most recent first)
+    projects = discover_capcut_projects()
+    for proj in projects:
+        for clip in get_project_encrypted_clips(proj.folder):
+            res_key = str(clip.resolve()).lower()
+            if res_key not in seen:
+                seen.add(res_key)
+                found_files.append(clip)
+        if len(found_files) >= limit * 2:
+            break
+
+    # Step 2: Fallback across all draft roots if more clips are needed
+    if len(found_files) < limit:
+        for r in get_default_draft_paths():
+            for v in find_encrypted_videos(r):
+                res_key = str(v.resolve()).lower()
+                if res_key not in seen:
+                    seen.add(res_key)
+                    found_files.append(v)
+                if len(found_files) >= limit * 2:
+                    break
 
     # Sort files by modification time descending
     items: list[RecentDraftItem] = []
