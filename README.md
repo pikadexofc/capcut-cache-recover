@@ -16,6 +16,9 @@
     <a href="https://opensource.org/licenses/MIT">
       <img src="https://img.shields.io/badge/License-MIT-fa7b1e?style=flat-square&labelColor=0d1117" alt="License MIT" />
     </a>
+    <a href="https://mdzobaedislamshanto.supportkori.shop/">
+      <img src="https://img.shields.io/badge/⚡%20Fund%20the%20Production-PixelPie%20Media-fa7b1e?style=flat-square&logo=shopware&logoColor=white" alt="Fund the Production" />
+    </a>
     <img src="https://img.shields.io/badge/Dependencies-0%20(Pure%20Python)-10b981?style=flat-square&labelColor=0d1117" alt="Zero Dependencies" />
     <img src="https://img.shields.io/badge/Privacy-100%25%20Local-10b981?style=flat-square&labelColor=0d1117" alt="100% Local" />
   </p>
@@ -51,14 +54,16 @@ irm https://raw.githubusercontent.com/pikadexofc/export-capcut-pro-video-free/ma
 1. Drag any unplayable video file (`*_video.mp4`, `.mov`, `.tmp`, or cache block) onto **`Export-CapCut-Free.bat`** on your Desktop.
 2. The engine instantly decrypts the file, checks container atoms, and outputs a clean MP4 right next to the original file.
 
-### Method 2: Modern Dark-Mode GUI (Visual App)
-Double-click **`Export-CapCut-Free.bat`** or run:
+### Method 2: Modern Dark-Mode GUI (Flagship Visual App)
+Double-click **`Export-CapCut-Free.bat`** on your Desktop or run:
 ```bash
 export-capcut-gui
 ```
-* **⚡ 1-Click Auto Scan**: Recursively searches all local and external drives for CapCut / JianYing draft cache folders and exports every video to your Desktop.
-* **📁 Single File Export**: Browse to any draft clip and click **Export Video**. Includes an option to auto-play upon completion.
-* **📂 Open Output Folder**: Instant button to reveal exported files in File Explorer.
+The application provides four dedicated workspaces:
+* **⚡ Quick Export**: Select any individual cache clip, decrypt in 0.3s, verify MP4 atoms, and optionally auto-play the video immediately.
+* **📁 Draft Library**: One-click automatic detection of all CapCut & JianYing projects across your drives with file size, draft project name, and caching timestamps.
+* **📦 Batch Queue**: Queue custom folders or multiple clips for automated bulk export.
+* **ℹ️ About & Production**: Full architecture specs, developer credits to **Md. Zobaed Islam Shanto**, and a direct **⚡ Fund the Production** button.
 
 ### Method 3: Smart Interactive CLI
 Run without arguments to access the guided menu:
@@ -197,10 +202,17 @@ This project is licensed under the [MIT License](LICENSE) © 2026 Shanto ([@pika
 
 <div align="center">
   <a href="https://github.com/pikadexofc">
-    <img src="assets/brand/logo.png" alt="PixelPie Media Logo" width="160" />
+    <img src="assets/brand/logo.png" alt="PixelPie Media Logo" width="180" />
   </a>
-  <p style="margin-top: 8px;"><b>Export Capcut Pro Video Free</b> is engineered and maintained by <b>PixelPie Media</b>.</p>
-  <p><i>Precision software engineering, spatial design, and local-first privacy systems.</i></p>
+  <p style="margin-top: 10px;">
+    <b>Export Capcut Pro Video Free</b> is engineered and maintained by <b>PixelPie Media</b>.<br/>
+    <i>Founded and developed by <a href="https://github.com/pikadexofc">Md. Zobaed Islam Shanto</a>.</i>
+  </p>
+  <p>
+    <a href="https://mdzobaedislamshanto.supportkori.shop/">
+      <img src="https://img.shields.io/badge/⚡%20Fund%20the%20Production-SupportKori-fa7b1e?style=for-the-badge&logo=shopware&logoColor=white" alt="Fund the Production" />
+    </a>
+  </p>
   <br />
   <img src="assets/brand/colours.png" alt="PixelPie Media Palette" width="100%" height="6" />
 </div>
