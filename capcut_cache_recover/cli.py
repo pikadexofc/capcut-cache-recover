@@ -1,4 +1,4 @@
-"""Command Line Interface for CapCut Cache Recover."""
+"""Command Line Interface for Export Capcut Pro Video Free."""
 
 from __future__ import annotations
 
@@ -7,20 +7,17 @@ import sys
 import time
 from pathlib import Path
 
-from . import __version__
+from . import __version__, __tool_name__
 from .cryptor import recover_file, DecodeError
 from .scanner import find_encrypted_videos, get_default_draft_paths
 from .validator import validate_mp4
 
 
 BANNER = r"""
-   ___               ___       __     ___                               
-  / __\__ _ _ __    / __\   _ / /_   / _ \___  ___ _____   _____ _ __ 
- / /  / _` | '_ \  / / | | | | __|  / /_)/ _ \/ __/ _ \ \ / / _ \ '__|
-/ /__| (_| | |_) |/ /__| |_| | |_  / ___/  __/ (_| (_) \ V /  __/ |   
-\____/\__,_| .__/ \____/\__,_|\__| \/    \___|\___\___/ \_/ \___|_|   
-           |_|                                  v""" + __version__ + """
-      Unlock & Recover Unplayable CapCut / ByteDance BDVE Cache Videos
+========================================================================
+   EXPORT CAPCUT PRO VIDEO FREE  -  v""" + __version__ + r"""
+   Unlock, Decrypt & Export Protected CapCut & JianYing Draft Videos
+========================================================================
 """
 
 
@@ -34,35 +31,35 @@ def format_size(num_bytes: int) -> str:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
-        prog="capcut-cache-recover",
-        description="Recover and decrypt unplayable CapCut & JianYing draft cache videos (BDVE Cryptor Type 1).",
+        prog="export-capcut-pro-video-free",
+        description="Export Capcut Pro Video Free: Recover and export unplayable CapCut & JianYing draft cache videos (BDVE Cryptor Type 1).",
     )
     parser.add_argument(
         "input",
         nargs="?",
         type=Path,
-        help="Path to encrypted CapCut video file or directory to process.",
+        help="Path to encrypted CapCut video file or directory to export.",
     )
     parser.add_argument(
         "-o", "--output",
         type=Path,
-        help="Output destination path for recovered video or output directory for batch scans.",
+        help="Output destination path for exported video or output directory for batch scans.",
     )
     parser.add_argument(
         "--scan",
         type=Path,
-        help="Scan a specific directory recursively for all BDVE encrypted draft videos.",
+        help="Scan a specific directory recursively for all BDVE encrypted draft videos to export.",
     )
     parser.add_argument(
         "--auto",
         action="store_true",
-        help="Automatically locate CapCut & JianYing draft directories and recover all encrypted clips.",
+        help="Automatically locate CapCut & JianYing draft directories and export all encrypted clips.",
     )
     parser.add_argument(
         "--verify",
         action="store_true",
         default=True,
-        help="Perform MP4 container validation after recovery (default: True).",
+        help="Perform MP4 container validation after export (default: True).",
     )
     parser.add_argument(
         "-v", "--verbose",
@@ -95,16 +92,16 @@ def main(argv=None) -> int:
             all_candidates.extend(candidates)
 
         if not all_candidates:
-            print("[*] No BDVE-encrypted videos currently pending recovery.")
+            print("[*] No BDVE-encrypted videos currently pending export.")
             return 0
 
-        out_dir = args.output or Path.cwd() / "recovered_capcut_videos"
+        out_dir = args.output or Path.cwd() / "exported_capcut_videos"
         out_dir.mkdir(parents=True, exist_ok=True)
-        print(f"[*] Recovering {len(all_candidates)} video(s) into: {out_dir}")
+        print(f"[*] Exporting {len(all_candidates)} video(s) into: {out_dir}")
 
         success_count = 0
         for i, src in enumerate(all_candidates, 1):
-            stem = src.stem.replace("_video", "") + "_recovered.mp4"
+            stem = src.stem.replace("_video", "") + "_exported.mp4"
             dest = out_dir / stem
             print(f"\n[{i}/{len(all_candidates)}] Processing: {src.name} ({format_size(src.stat().st_size)})")
             try:
@@ -117,7 +114,7 @@ def main(argv=None) -> int:
             except Exception as e:
                 print(f"    [FAIL] Error: {e}")
 
-        print(f"\n[DONE] Successfully recovered {success_count}/{len(all_candidates)} videos.")
+        print(f"\n[DONE] Successfully exported {success_count}/{len(all_candidates)} videos.")
         return 0
 
     # 2. SCAN FOLDER MODE
@@ -132,12 +129,12 @@ def main(argv=None) -> int:
         if not candidates:
             return 0
 
-        out_dir = args.output or scan_dir / "recovered"
+        out_dir = args.output or scan_dir / "exported"
         out_dir.mkdir(parents=True, exist_ok=True)
 
         success_count = 0
         for i, src in enumerate(candidates, 1):
-            dest = out_dir / f"{src.stem}_recovered.mp4"
+            dest = out_dir / f"{src.stem}_exported.mp4"
             print(f"\n[{i}/{len(candidates)}] Processing: {src.name}")
             try:
                 recover_file(src, dest, log=logger)
@@ -145,7 +142,7 @@ def main(argv=None) -> int:
             except Exception as e:
                 print(f"    [FAIL] Error: {e}")
 
-        print(f"\n[DONE] Successfully recovered {success_count}/{len(candidates)} videos.")
+        print(f"\n[DONE] Successfully exported {success_count}/{len(candidates)} videos.")
         return 0
 
     # 3. SINGLE FILE MODE
@@ -159,11 +156,11 @@ def main(argv=None) -> int:
             print(f"[*] Input is a directory. Switching to scan mode on '{src}'...")
             candidates = list(find_encrypted_videos(src))
             print(f"[*] Found {len(candidates)} encrypted files.")
-            out_dir = args.output or src / "recovered"
+            out_dir = args.output or src / "exported"
             out_dir.mkdir(parents=True, exist_ok=True)
             for s in candidates:
-                d = out_dir / f"{s.stem}_recovered.mp4"
-                print(f"[*] Recovering {s.name} -> {d.name}")
+                d = out_dir / f"{s.stem}_exported.mp4"
+                print(f"[*] Exporting {s.name} -> {d.name}")
                 recover_file(s, d, log=logger)
             return 0
 
@@ -171,9 +168,9 @@ def main(argv=None) -> int:
         if args.output:
             dest = args.output
             if dest.is_dir():
-                dest = dest / f"{src.stem}_recovered.mp4"
+                dest = dest / f"{src.stem}_exported.mp4"
         else:
-            dest = src.parent / f"{src.stem}_recovered.mp4"
+            dest = src.parent / f"{src.stem}_exported.mp4"
 
         print(f"[*] Source file:      {src} ({format_size(src.stat().st_size)})")
         print(f"[*] Destination:      {dest}")
@@ -182,7 +179,7 @@ def main(argv=None) -> int:
         try:
             params = recover_file(src, dest, log=logger)
             elapsed = time.perf_counter() - start_time
-            print(f"[+] Decryption completed in {elapsed:.2f}s!")
+            print(f"[+] Decryption and export completed in {elapsed:.2f}s!")
             print(f"    - Key:      0x{params.key:02X}")
             print(f"    - Step:     {params.step:,} bytes")
             print(f"    - Length:   {params.length:,} bytes")
@@ -198,11 +195,11 @@ def main(argv=None) -> int:
                 else:
                     print(f"[-] Container Check Warning: {val.error}")
 
-            print(f"\n[SUCCESS] Your recovered video is ready at:\n  {dest.resolve()}")
+            print(f"\n[SUCCESS] Your exported video is ready at:\n  {dest.resolve()}")
             return 0
 
         except DecodeError as e:
-            print(f"[-] Recovery failed: {e}")
+            print(f"[-] Export failed: {e}")
             return 1
         except Exception as e:
             print(f"[-] Unexpected error: {e}")
