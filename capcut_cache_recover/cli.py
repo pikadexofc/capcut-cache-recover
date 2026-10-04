@@ -11,6 +11,8 @@ from . import __version__, __tool_name__
 from .cryptor import recover_file, DecodeError
 from .scanner import find_encrypted_videos, get_default_draft_paths
 from .validator import validate_mp4
+from .metadata import resolve_capcut_metadata
+from .selector import scan_recent_drafts, interactive_select_draft, prompt_windows_save_dialog
 
 
 BANNER = r"""
@@ -54,6 +56,21 @@ def main(argv=None) -> int:
         "--auto",
         action="store_true",
         help="Automatically locate CapCut & JianYing draft directories and export all encrypted clips.",
+    )
+    parser.add_argument(
+        "-r", "--recent",
+        action="store_true",
+        help="Interactively browse and export recent CapCut draft videos using arrow keys.",
+    )
+    parser.add_argument(
+        "-s", "--save-as",
+        action="store_true",
+        help="Open native Windows Explorer 'Save As' pop-out dialog (Ctrl+S style) to pick export location.",
+    )
+    parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Display detailed cryptographic progress and byte-offset logs.",
     )
     parser.add_argument(
         "--verify",
@@ -106,9 +123,9 @@ def main(argv=None) -> int:
 
         success_count = 0
         for i, src in enumerate(all_candidates, 1):
-            stem = src.stem.replace("_video", "") + "_exported.mp4"
-            dest = out_dir / stem
-            print(f"\n[{i}/{len(all_candidates)}] Processing: {src.name} ({format_size(src.stat().st_size)})")
+            meta = resolve_capcut_metadata(src)
+            dest = out_dir / meta.suggested_filename
+            print(f"\n[{i}/{len(all_candidates)}] Processing: {meta.get_display_title()} ({format_size(src.stat().st_size)})")
             try:
                 recover_file(src, dest, log=logger)
                 if args.verify:
@@ -139,8 +156,9 @@ def main(argv=None) -> int:
 
         success_count = 0
         for i, src in enumerate(candidates, 1):
-            dest = out_dir / f"{src.stem}_exported.mp4"
-            print(f"\n[{i}/{len(candidates)}] Processing: {src.name}")
+            meta = resolve_capcut_metadata(src)
+            dest = out_dir / meta.suggested_filename
+            print(f"\n[{i}/{len(candidates)}] Processing: {meta.get_display_title()}")
             try:
                 recover_file(src, dest, log=logger)
                 success_count += 1
@@ -164,20 +182,36 @@ def main(argv=None) -> int:
             out_dir = args.output or src / "exported"
             out_dir.mkdir(parents=True, exist_ok=True)
             for s in candidates:
-                d = out_dir / f"{s.stem}_exported.mp4"
-                print(f"[*] Exporting {s.name} -> {d.name}")
+                meta = resolve_capcut_metadata(s)
+                d = out_dir / meta.suggested_filename
+                print(f"[*] Exporting {meta.get_display_title()} -> {d.name}")
                 recover_file(s, d, log=logger)
             return 0
 
-        # Output path derivation
-        if args.output:
+        # Output path derivation with automatic project name resolution
+        meta = resolve_capcut_metadata(src)
+        if args.save_as:
+            print("[*] Opening Windows Explorer 'Save As' pop-out dialog...")
+            save_dest = prompt_windows_save_dialog(
+                suggested_filename=meta.suggested_filename,
+                initial_dir=src.parent,
+                title="Export Capcut Pro Video Free - Choose Destination"
+            )
+            if not save_dest:
+                print("[-] Export cancelled by user.")
+                return 0
+            dest = save_dest
+        elif args.output:
             dest = args.output
             if dest.is_dir():
-                dest = dest / f"{src.stem}_exported.mp4"
+                dest = dest / meta.suggested_filename
         else:
-            dest = src.parent / f"{src.stem}_exported.mp4"
+            dest = src.parent / meta.suggested_filename
 
         print(f"[*] Source file:      {src} ({format_size(src.stat().st_size)})")
+        print(f"[*] Detected Project: {meta.project_name}")
+        if meta.clip_name:
+            print(f"[*] Material Clip:    {meta.clip_name}")
         print(f"[*] Destination:      {dest}")
 
         start_time = time.perf_counter()
@@ -210,9 +244,63 @@ def main(argv=None) -> int:
             print(f"[-] Unexpected error: {e}")
             return 1
 
-    # 4. ZERO-ARGUMENT INTERACTIVE FLOW
-    if sys.stdin.isatty() and argv is None:
-        print("[?] No arguments provided. Select an option:")
+    # 4. RECENT INTERACTIVE SELECTOR & ZERO-ARGUMENT FLOW
+    if args.recent or (sys.stdin.isatty() and argv is None):
+        recent_items = scan_recent_drafts(limit=15)
+        if recent_items:
+            chosen = interactive_select_draft(recent_items)
+            if chosen:
+                print(f"\n[*] Selected: {chosen.meta.get_display_title()}")
+                print("[*] Opening Windows Explorer 'Save As' pop-out dialog (Ctrl+S style)...")
+                save_dest = prompt_windows_save_dialog(
+                    suggested_filename=chosen.meta.suggested_filename,
+                    initial_dir=Path.home() / "Desktop" / "Exported_CapCut_Videos",
+                    title="Export Capcut Pro Video Free - Save Video As"
+                )
+                if not save_dest:
+                    print("[-] Save cancelled by user.")
+                    return 0
+
+                dest = save_dest
+                src = chosen.path
+                meta = chosen.meta
+                dest.parent.mkdir(parents=True, exist_ok=True)
+
+                print(f"[*] Source file:      {src} ({format_size(src.stat().st_size)})")
+                print(f"[*] Detected Project: {meta.project_name}")
+                if meta.clip_name:
+                    print(f"[*] Material Clip:    {meta.clip_name}")
+                print(f"[*] Destination:      {dest}")
+
+                start_time = time.perf_counter()
+                try:
+                    params = recover_file(src, dest, log=logger)
+                    elapsed = time.perf_counter() - start_time
+                    print(f"[+] Decryption and export completed in {elapsed:.2f}s!")
+                    print(f"    - Key:      0x{params.key:02X}")
+                    print(f"    - Step:     {params.step:,} bytes")
+                    print(f"    - Length:   {params.length:,} bytes")
+
+                    if args.verify:
+                        print("[*] Validating MP4 container integrity...")
+                        val = validate_mp4(dest)
+                        if val.is_valid:
+                            print("[+] Container Check: PASS (100% valid MP4)")
+                            print(f"    - Duration:    {val.duration_seconds}s")
+                            print(f"    - Video Track: {'Yes' if val.has_video else 'No'} ({val.video_width}x{val.video_height})")
+                            print(f"    - Audio Track: {'Yes' if val.has_audio else 'No'}")
+
+                    print(f"\n[SUCCESS] Your exported video is ready at:\n  {dest.resolve()}")
+                    return 0
+                except Exception as e:
+                    print(f"[-] Export failed: {e}")
+                    return 1
+            else:
+                if args.recent:
+                    return 0
+                print("\n[?] Draft selection cancelled. Showing options:")
+
+        print("[?] Select an option:")
         print("    [1] ⚡ 1-Click Auto Scan & Export All CapCut Drafts Free (Recommended)")
         print("    [2] 🎬 Launch Modern Visual GUI")
         print("    [3] 📂 Enter a video file path manually")

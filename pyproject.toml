@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "export-capcut-pro-video-free"
-version = "1.0.0"
+version = "1.0.1"
 description = "Export Capcut Pro Video Free - High-performance recovery engine to decrypt, unlock, and export unplayable CapCut & JianYing draft cache videos."
 readme = "README.md"
 requires-python = ">=3.9"

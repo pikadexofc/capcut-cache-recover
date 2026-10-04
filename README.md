@@ -11,7 +11,7 @@
       <img src="https://img.shields.io/github/actions/workflow/status/pikadexofc/export-capcut-pro-video-free/ci.yml?branch=main&label=CI&style=flat-square&color=fa7b1e&labelColor=0d1117" alt="CI Status" />
     </a>
     <a href="https://github.com/pikadexofc/export-capcut-pro-video-free/releases">
-      <img src="https://img.shields.io/badge/Release-v1.0.0-fa7b1e?style=flat-square&labelColor=0d1117" alt="Version 1.0.0" />
+      <img src="https://img.shields.io/badge/Release-v1.0.1-fa7b1e?style=flat-square&labelColor=0d1117" alt="Version 1.0.1" />
     </a>
     <a href="https://opensource.org/licenses/MIT">
       <img src="https://img.shields.io/badge/License-MIT-fa7b1e?style=flat-square&labelColor=0d1117" alt="License MIT" />
@@ -40,18 +40,19 @@ irm https://raw.githubusercontent.com/pikadexofc/export-capcut-pro-video-free/ma
 
 ---
 
-## 🧒 Explain Like I'm 10: How Does It Work?
+## 💡 How It Works: Simple & Clear Overview
 
-1. **The Problem**: When CapCut saves your draft preview, it scrambles every 50th piece of your video like a messy puzzle so regular players (like VLC or Windows Media Player) get confused and give up.
-2. **The Magic**: **Export Capcut Pro Video Free** finds the exact secret rule CapCut used to scramble it, unscrambles the puzzle pieces in **less than 1 second**, and throws away the lock!
-3. **The Result**: You get your full video back with **zero scratches**, **100% original quality**, ready to watch and share!
+1. **Why Draft Videos Fail to Play**: When CapCut or JianYing creates temporary draft caches and Pro combination previews, it applies a fast byte-level periodic XOR scramble across slices of the file and attaches a proprietary container trailer. Standard video players (VLC, Windows Media Player, Premiere Pro) see these scrambled headers and report `moov atom not found` or corrupted stream errors.
+2. **How the Tool Restores It**: **Export Capcut Pro Video Free** derives the exact mathematical periodic scrambling constraint in milliseconds, reverses the XOR transformation in-place, and normalizes the standard MP4 atoms.
+3. **Bitstream-Exact Export (Zero Quality Loss)**: The video is never re-compressed or transcoded. Your original 4K/1080p video frames (AVC/H.264, HEVC) and AAC audio stream are preserved bit-for-bit with 100% original fidelity intact.
 
 ---
 
-## 💎 The Three Core Pillars
+## 💎 The Four Core Pillars
 
 * **Zero Re-Encoding Loss**: Unlike screen recorders or transcoders that degrade bitrates and introduce generational compression artifacts, this engine mathematically inverts the XOR obfuscation in-place. The exact original H.264 NAL units and AAC audio frames are preserved bit-for-bit.
-* **Zero-Friction Ergonomics**: Engineered for video editors and creators. Features a **1-second Windows Drag & Drop launcher**, an **auto-scanning dark-mode desktop GUI**, and an **interactive CLI** that auto-discovers CapCut draft folders without typing paths.
+* **🧠 Smart Project & Clip Name Detection**: CapCut draft caches use opaque GUIDs (e.g. `48C34141-8F08-4483-A597-073963B3DB0A_video.mp4`). Our engine automatically inspects draft project metadata (`draft_meta_info.json`, `draft_content.json`, and CapCut AppData catalogs) to extract your actual CapCut Project Name and timeline clip title, automatically exporting clean human-readable files (e.g., `shining motion u - Compound clip16.mp4`).
+* **Zero-Friction Ergonomics**: Engineered for video editors and creators. Features a **native Drag & Drop window**, an **auto-scanning dark-mode desktop GUI**, and an **interactive CLI** that auto-discovers CapCut draft folders without typing paths.
 * **100% Local & Offline**: Operates purely within your local machine sandbox using Python's standard library. Zero cloud uploads, zero telemetry, and zero third-party software dependencies.
 
 ---
@@ -73,23 +74,41 @@ The application provides four dedicated workspaces:
 * **📦 Batch Queue**: Queue custom folders or multiple clips for automated bulk export.
 * **ℹ️ About & Production**: Full architecture specs, developer credits to **Md. Zobaed Islam Shanto**, and a direct **⚡ Fund the Production** button.
 
-### Method 3: Smart Interactive CLI
-Run without arguments to access the guided menu:
+### Method 3: Interactive CLI & Arrow-Key Selector
+Run without arguments in PowerShell or CMD to automatically scan and interactively browse your recent projects:
 ```bash
 export-capcut-pro-video-free
 ```
 ```text
-[?] No arguments provided. Select an option:
-    [1] ⚡ 1-Click Auto Scan & Export All CapCut Drafts Free (Recommended)
-    [2] 🎬 Launch Modern Visual GUI
-    [3] 📂 Enter a video file path manually
-    [4] ❓ View Command Line Help
+========================================================================
+   EXPORT CAPCUT PRO VIDEO FREE  -  INTERACTIVE DRAFT SELECTOR
+   Use [UP / DOWN] arrow keys to navigate, [ENTER] to export, [Q] to quit
+========================================================================
+
+Detected 14 recent protected CapCut & JianYing draft video(s):
+
+ ▶ [ 1] shining motion u - Compound clip16    43.7 MB  │  1 hr ago    
+   [ 2] shining motion u - Compound clip16    28.1 MB  │  1 hr ago    
+   [ 3] shining motion u                      28.1 MB  │  1 hr ago    
+   [ 4] unn drone m - 547e2aa258e6639f0cb     18.4 MB  │  3 days ago  
+
+------------------------------------------------------------------------
+Selected: shining motion u
+Material: Compound clip16
+Save As:  shining motion u - Compound clip16.mp4
+------------------------------------------------------------------------
+Press [Enter] to choose destination in Windows Explorer dialog.
 ```
+
+When you hit `[Enter]`, a **native Windows Explorer "Save As" pop-out dialog (`Ctrl+S` style)** automatically opens, pre-filled with the auto-resolved project name, letting you save your clean MP4 anywhere you want with 100% control!
 
 Or pass flags directly:
 ```bash
-# Export a single video
-export-capcut-pro-video-free "D:\capcut cache\draft\video.mp4" -o exported.mp4
+# Export a single video and choose destination via Windows Explorer Save As dialog
+export-capcut-pro-video-free "D:\capcut cache\draft\video.mp4" --save-as
+
+# Export a single video directly to a specific destination
+export-capcut-pro-video-free "D:\capcut cache\draft\video.mp4" -o "C:\MyVideos\final.mp4"
 
 # Auto-detect and export all CapCut drafts across all drives
 export-capcut-pro-video-free --auto
